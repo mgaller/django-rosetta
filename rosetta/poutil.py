@@ -149,7 +149,7 @@ def find_pos(lang, project_apps=True, django_apps=False, third_party_apps=False)
     paths = list(set(paths))
     for path in paths:
         # Exclude paths
-        if path not in rosetta_settings.ROSETTA_EXCLUDED_PATHS:
+        if not any([p in path for p in rosetta_settings.ROSETTA_EXCLUDED_PATHS]):
             for lang_ in langs:
                 dirname = os.path.join(path, lang_, "LC_MESSAGES")
                 for fn in rosetta_settings.POFILENAMES:
